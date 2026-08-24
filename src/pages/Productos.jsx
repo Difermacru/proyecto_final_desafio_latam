@@ -8,12 +8,12 @@ function Productos() {
 
   // useEffect: se ejecuta una vez cuando la página carga
   useEffect(() => {
-    // Datos temporales (luego vendrán desde la API)
+    // Datos temporales 
     const datos = [
-      { id: 1, nombre: "Alimento Premium", precio: "25.99" },
-      { id: 2, nombre: "Juguete para Perros", precio: "8.75" },
-      { id: 3, nombre: "Cama Ortopédica", precio: "45.00" },
-      { id: 4, nombre: "Correa Retráctil", precio: "12.99" },
+      { id: 1, nombre: "Alimento Premium", precio: "25.99", imagen: "/alimento.jpg" },
+      { id: 2, nombre: "Juguete para Perros", precio: "8.75", imagen: "/juguete.jpg" },
+      { id: 3, nombre: "Cama Ortopédica", precio: "45.00", imagen: "/cama.jpg" },
+      { id: 4, nombre: "Correa Retráctil", precio: "12.99", imagen: "/correa.jpg" },
     ];
     setProductos(datos); // guarda los datos en el estado
   }, []); // el [] vacío significa "ejecuta solo una vez al cargar"
@@ -25,7 +25,12 @@ function Productos() {
         {/* recorre el estado 'productos' y crea una tarjeta por cada uno */}
         {productos.map((producto) => (
           <div className="col-md-4 mb-3" key={producto.id}>
-            <ProductCard id={producto.id} nombre={producto.nombre} precio={producto.precio} />
+            <ProductCard
+              id={producto.id}
+              nombre={producto.nombre}
+              precio={producto.precio}
+              imagen={producto.imagen}
+            />
           </div>
         ))}
       </div>

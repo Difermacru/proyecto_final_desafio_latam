@@ -5,13 +5,13 @@ import ServiceCard from '../components/ServiceCard'; // tarjeta de servicios
 function Servicios() {
   const [servicios, setServicios] = useState([]); // estado: lista de servicios
 
-  // al cargar, llenamos los servicios (luego vendrán de la API)
+  // al cargar, llenamos los servicios (luego vendrán de la API) — con imagen
   useEffect(() => {
     setServicios([
-      { id: 1, nombre: "Baño y Peluquería", precio: "30.00" },
-      { id: 2, nombre: "Paseos Diarios", precio: "15.00" },
-      { id: 3, nombre: "Guardería Canina", precio: "40.00" },
-      { id: 4, nombre: "Consulta Veterinaria", precio: "50.00" },
+      { id: 1, nombre: "Baño y Peluquería", precio: "30.00", imagen: "/bano.jpg" },
+      { id: 2, nombre: "Paseos Diarios", precio: "15.00", imagen: "/paseo.jpg" },
+      { id: 3, nombre: "Guardería Canina", precio: "40.00", imagen: "/guarderia.jpg" },
+      { id: 4, nombre: "Consulta Veterinaria", precio: "50.00", imagen: "/consulta.jpg" },
     ]);
   }, []);
 
@@ -22,7 +22,12 @@ function Servicios() {
         {/* recorre los servicios y crea una tarjeta por cada uno */}
         {servicios.map((servicio) => (
           <div className="col-md-3 mb-3" key={servicio.id}>
-            <ServiceCard nombre={servicio.nombre} precio={servicio.precio} />
+            {/* pasamos la imagen como prop */}
+            <ServiceCard
+              nombre={servicio.nombre}
+              precio={servicio.precio}
+              imagen={servicio.imagen}
+            />
           </div>
         ))}
       </div>

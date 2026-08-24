@@ -2,12 +2,12 @@ import { useParams } from 'react-router-dom'; // useParams lee el ID de la URL
 import { useContext } from 'react'; // hook para el contexto
 import { CarritoContext } from '../context/CarritoContext'; // contexto del carrito
 
-// Lista de productos (temporal, luego vendrá de tu API)
+// Lista de productos (temporal, luego vendrá de tu API) — con imagen
 const productos = [
-  { id: 1, nombre: "Alimento Premium", precio: "25.99", descripcion: "Alimento balanceado para perros de todas las edades." },
-  { id: 2, nombre: "Juguete para Perros", precio: "8.75", descripcion: "Juguete resistente e interactivo para tu mascota." },
-  { id: 3, nombre: "Cama Ortopédica", precio: "45.00", descripcion: "Cama cómoda con soporte ortopédico." },
-  { id: 4, nombre: "Correa Retráctil", precio: "12.99", descripcion: "Correa extensible de 5 metros." },
+  { id: 1, nombre: "Alimento Premium", precio: "25.99", descripcion: "Alimento balanceado para perros de todas las edades.", imagen: "/alimento.jpg" },
+  { id: 2, nombre: "Juguete para Perros", precio: "8.75", descripcion: "Juguete resistente e interactivo para tu mascota.", imagen: "/juguete.jpg" },
+  { id: 3, nombre: "Cama Ortopédica", precio: "45.00", descripcion: "Cama cómoda con soporte ortopédico.", imagen: "/cama.jpg" },
+  { id: 4, nombre: "Correa Retráctil", precio: "12.99", descripcion: "Correa extensible de 5 metros.", imagen: "/correa.jpg" },
 ];
 
 // Página que muestra el detalle de UN producto
@@ -26,11 +26,13 @@ function DetalleProducto() {
   return (
     <div className="container mt-4">
       <div className="row">
-        {/* Columna izquierda: imagen (placeholder por ahora) */}
+        {/* Columna izquierda: imagen real del producto */}
         <div className="col-md-6">
-          <div className="bg-light d-flex align-items-center justify-content-center" style={{ height: '300px' }}>
-            <span className="text-muted">Imagen del producto</span>
-          </div>
+          <img
+            src={producto.imagen}                          // ruta de la imagen
+            className="img-fluid rounded"                    // img-fluid: se adapta; rounded: bordes redondeados
+            alt={producto.nombre}                            // texto alternativo
+          />
         </div>
 
         {/* Columna derecha: info del producto */}

@@ -1,24 +1,21 @@
-/* ===== COLORES DE MARCA VETMARKET ===== */
+/* ===== ESTILOS GENERALES DE MARCA ===== */
+/* Aplica a: fondo del sitio, navbar, tarjetas base, botones y títulos (todas las páginas) */
 
-/* Fondo general suave */
 body {
   background-color: #f8f9fa;
 }
 
-/* Navbar con color de marca (verde veterinario) */
 .navbar {
-  background-color: #2e7d32 !important; /* verde */
+  background-color: #2e7d32 !important;
 }
-/* Texto del navbar en blanco para que resalte */
 .navbar .navbar-brand,
 .navbar .nav-link {
   color: #ffffff !important;
 }
 .navbar .nav-link:hover {
-  color: #ffeb3b !important; /* amarillo al pasar el cursor */
+  color: #ffeb3b !important;
 }
 
-/* Tarjetas con sombra y bordes redondeados */
 .card {
   border: none;
   border-radius: 12px;
@@ -30,7 +27,6 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Botones primarios en azul vibrante */
 .btn-primary {
   background-color: #1976d2;
   border: none;
@@ -39,47 +35,169 @@ body {
   background-color: #1565c0;
 }
 
-/* Botones de éxito en verde */
 .btn-success {
   background-color: #43a047;
   border: none;
 }
 
-/* Títulos con un color más fuerte */
 h1, h2, h3 {
-  color: #1b5e20; /* verde oscuro */
+  color: #1b5e20;
 }
+
 
 /* ===== MENÚ LATERAL DEL PANEL ===== */
+/* Aplica a: PanelMenu (Perfil, Mis Pedidos, Mis Citas, Mis Favoritos, Mis Publicaciones, Configuración) */
 
-/* la columna completa del menú: fondo verde claro de arriba a abajo */
 .panel-sidebar {
-  background-color: #e8f5e9; /* verde muy claro */
+  background-color: #e8f5e9;
   padding: 25px 15px;
-  min-height: 100%; /* ocupa toda la altura disponible */
-  border-right: 2px solid #c8e6c9; /* línea divisoria a la derecha */
+  min-height: 100%;
+  border-right: 2px solid #c8e6c9;
 }
 
-/* estilo base de cada enlace del menú */
 .panel-link {
-  color: #2e7d32 !important; /* verde */
+  color: #2e7d32 !important;
   border-radius: 8px;
   transition: all 0.2s;
   margin-bottom: 6px;
   padding: 10px 14px;
   display: block;
 }
-
-/* hover: fondo verde medio */
 .panel-link:hover {
   background-color: #a5d6a7;
   color: #1b5e20 !important;
   padding-left: 20px;
 }
-
-/* opción activa: verde fuerte con texto blanco */
 .panel-link.active {
   background-color: #2e7d32;
   color: #ffffff !important;
   font-weight: 600;
+}
+
+
+/* ===== IMÁGENES DE PRODUCTOS Y FAVORITOS ===== */
+/* Aplica a: imágenes de ProductCard (Listado y Destacados) y de Mis Favoritos */
+
+.card-img-top {
+  height: 300px;
+  object-fit: contain;
+  width: 100%;
+  padding: 10px;
+}
+
+
+/* ===== IMAGEN DEL DETALLE DE PRODUCTO ===== */
+/* Aplica a: la imagen en la página DetalleProducto (Ver Detalle) */
+
+.detalle-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.detalle-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+/* ===== TARJETAS DE SERVICIO ===== */
+/* Aplica a: ServiceCard (página Servicios) */
+
+.service-card {
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+}
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-card__img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.service-card__body {
+  padding: 18px;
+  text-align: center;
+}
+
+.service-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1b5e20;
+  margin-bottom: 8px;
+}
+
+.service-card__price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1976d2;
+  margin-bottom: 14px;
+}
+
+.service-card__btn {
+  width: 100%;
+  background-color: #43a047;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.service-card__btn:hover {
+  background-color: #2e7d32;
+}
+
+/* ===== HERO DE LA PÁGINA DE INICIO ===== */
+/* Aplica a: la imagen grande con texto en la parte superior del Inicio */
+
+.hero {
+  height: 400px;
+  background-image: url('/hero.jpg');   /* imagen de fondo (ponla en public/) */
+  background-size: cover;               /* la imagen llena todo el espacio */
+  background-position: top;          /* centrada */
+  display: flex;
+  align-items: center;                  /* centra el texto verticalmente */
+  justify-content: center;
+  position: relative;
+}
+
+/* capa oscura encima de la imagen para que el texto se lea bien */
+.hero__overlay {
+  background-color: rgba(0, 0, 0, 0.45); /* negro semitransparente */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* título grande del hero, en blanco */
+.hero__title {
+  color: #ffffff !important;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* subtítulo del hero */
+.hero__subtitle {
+  color: #f0f0f0;
+  font-size: 1.3rem;
 }
