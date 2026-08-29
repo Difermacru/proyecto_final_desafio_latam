@@ -1,24 +1,28 @@
-import { createContext, useState } from 'react'; // herramientas para contexto y estado
+import { createContext, useState } from 'react';
 
-// 1. Creamos el contexto del usuario (almacén global de la sesión)
 export const UsuarioContext = createContext();
 
-// 2. El Provider reparte la info del usuario a toda la app
 export function UsuarioProvider({ children }) {
-  const [usuario, setUsuario] = useState(null); // null = nadie logueado
+  // al iniciar, intentamos recuperar el usuario guardado en localStorage
+  const [usuario, setUsuario] = useState(() => {
+    const guardado = localStorage.getItem('usuario');
+    return guardado ? JSON.parse(guardado) : null;
+  });
 
-  // Función para iniciar sesión (guarda los datos del usuario)
+  // login: guarda el usuario en el estado Y en localStorage
   const login = (datosUsuario) => {
     setUsuario(datosUsuario);
+    localStorage.setItem('usuario', JSON.stringify(datosUsuario));
   };
 
-  // Función para cerrar sesión (borra los datos)
+  // logout: borra el usuario del estado Y de localStorage
   const logout = () => {
     setUsuario(null);
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('token'); // también borra el token
   };
 
   return (
-    // ponemos a disposición: el usuario, y las funciones login/logout
     <UsuarioContext.Provider value={{ usuario, login, logout }}>
       {children}
     </UsuarioContext.Provider>

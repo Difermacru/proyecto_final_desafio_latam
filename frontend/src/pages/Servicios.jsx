@@ -7,12 +7,10 @@ function Servicios() {
 
   // al cargar, llenamos los servicios (luego vendrán de la API) — con imagen
   useEffect(() => {
-    setServicios([
-      { id: 1, nombre: "Baño y Peluquería", precio: "30.00", imagen: "/bano.jpg" },
-      { id: 2, nombre: "Paseos Diarios", precio: "15.00", imagen: "/paseo.jpg" },
-      { id: 3, nombre: "Guardería Canina", precio: "40.00", imagen: "/guarderia.jpg" },
-      { id: 4, nombre: "Consulta Veterinaria", precio: "50.00", imagen: "/consulta.jpg" },
-    ]);
+    fetch('http://localhost:3000/api/servicios')
+      .then((res) => res.json())
+      .then((data) => setServicios(data))
+      .catch((error) => console.error('Error al cargar servicios:', error));
   }, []);
 
   return (
@@ -25,8 +23,8 @@ function Servicios() {
             {/* pasamos la imagen como prop */}
             <ServiceCard
               nombre={servicio.nombre}
-              precio={servicio.precio}
-              imagen={servicio.imagen}
+              precio={servicio.precio_base}
+              imagen={servicio.imagen || "/bano.jpg"}
             />
           </div>
         ))}

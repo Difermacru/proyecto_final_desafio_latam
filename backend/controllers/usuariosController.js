@@ -1,42 +1,36 @@
 const pool = require('../db');
 const bcrypt = require('bcryptjs');
 
-
+// Registra un usuario nuevo
 const registrarUsuario = async (req, res) => {
     try {
-        const { nombre, apellido, email, password, telefono, direccion, ciudad, region } = req.body;
+        const { nombre, email, password, rol } = req.body;
 
-
-        // 1. Encriptar la contraseña
+        // encriptamos la contraseña antes de guardarla
         const salt = await bcrypt.genSalt(10);
         const password_hash = await bcrypt.hash(password, salt);
 
-
-        // 2. Insertar en la base de datos
+        // insertamos en la base de datos (solo las columnas que existen)
         const query = `
-            INSERT INTO usuarios (nombre, apellido, email, password_hash, telefono, direccion, ciudad, region, rol)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-            RETURNING id AS id_usuario, nombre, apellido, email, telefono
+            INSERT INTO usuarios (nombre, email, password_hash, rol)
+            VALUES ($1, $2, $3, $4)
+            RETURNING id, nombre, email, rol
         `;
-        const values = [nombre, apellido, email, password_hash, telefono, direccion, ciudad, region, 'cliente'];
+        const values = [nombre, email, password_hash, rol || 'cliente'];
 
         const { rows } = await pool.query(query, values);
 
-
-        // 3. Responder con el formato exacto del contrato de la API
         res.status(201).json({
             message: "Usuario registrado exitosamente",
             usuario: rows[0]
         });
-        
     } catch (error) {
-        // Manejo de error si el email ya existe
+        // si el email ya existe (violación de la restricción UNIQUE)
         if (error.code === '23505') {
             return res.status(400).json({ message: "El correo electrónico ya está registrado" });
         }
         res.status(500).json({ error: error.message, message: 'Error interno del servidor' });
     }
 };
-
 
 module.exports = { registrarUsuario };

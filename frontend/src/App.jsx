@@ -1,20 +1,21 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // herramientas de React Router
-import Navbar from './components/Navbar'; // la barra de arriba
-import Footer from './components/Footer'; // el pie de página
-import Inicio from './pages/Inicio';      // la página de inicio
-import Productos from './pages/Productos'; // importa la página de productos
-import Servicios from './pages/Servicios'; // importa la página de servicios
-import Login from './pages/Login'; // importa la página de login
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
+import Navbar from './components/Navbar'; 
+import Footer from './components/Footer'; 
+import Inicio from './pages/Inicio';      
+import Productos from './pages/Productos'; 
+import Servicios from './pages/Servicios'; 
+import Login from './pages/Login'; 
 import Carrito from './pages/Carrito';
-import Registro from './pages/Registro'; // importa la página de registro
-import Perfil from './pages/Perfil'; // importa el panel de usuario
-import MisPedidos from './pages/MisPedidos'; // importa la página de pedidos
-import MisCitas from './pages/MisCitas'; // importa la página de citas
-import MisFavoritos from './pages/MisFavoritos'; // importa la página de favoritos
-import MisPublicaciones from './pages/MisPublicaciones'; // importa la página de publicaciones
-import Configuracion from './pages/Configuracion'; // importa la página de configuración
-import RutaProtegida from './components/RutaProtegida'; // guardián de rutas privadas
-import DetalleProducto from './pages/DetalleProducto'; // importa el detalle de producto
+import Registro from './pages/Registro'; 
+import Perfil from './pages/Perfil'; 
+import MisPedidos from './pages/MisPedidos'; 
+import MisCitas from './pages/MisCitas'; 
+import MisFavoritos from './pages/MisFavoritos'; 
+import MisPublicaciones from './pages/MisPublicaciones'; 
+import Configuracion from './pages/Configuracion'; 
+import RutaProtegida from './components/RutaProtegida'; 
+import DetalleProducto from './pages/DetalleProducto';
+import NuevaPublicacion from './pages/NuevaPublicacion';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route path="/mis-publicaciones" element={<RutaProtegida><MisPublicaciones /></RutaProtegida>} />
             <Route path="/configuracion" element={<RutaProtegida><Configuracion /></RutaProtegida>} />
             <Route path="/producto/:id" element={<DetalleProducto />} /> 
+            <Route path="/nueva-publicacion" element={<RutaProtegida><NuevaPublicacion /></RutaProtegida>} />
 
           </Routes>
         </div>
