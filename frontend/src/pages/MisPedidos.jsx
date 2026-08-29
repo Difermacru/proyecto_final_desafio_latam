@@ -7,12 +7,10 @@ function MisPedidos() {
 
   // al cargar, llenamos los pedidos (luego vendrán de la API)
   useEffect(() => {
-    setPedidos([
-      { id: "#001", fecha: "2023-10-26", articulos: "2 artículos", total: "57.50", estado: "Entregado" },
-      { id: "#002", fecha: "2023-09-15", articulos: "2 artículos", total: "85.00", estado: "En camino" },
-      { id: "#003", fecha: "2023-08-01", articulos: "1 artículo", total: "30.00", estado: "Entregado" },
-      { id: "#004", fecha: "2023-07-12", articulos: "3 artículos", total: "124.00", estado: "Cancelado" },
-    ]);
+    fetch('http://localhost:3000/api/pedidos')
+      .then((res) => res.json())
+      .then((data) => setPedidos(data))
+      .catch((error) => console.error('Error al cargar pedidos:', error));
   }, []);
 
   return (
@@ -40,11 +38,9 @@ function MisPedidos() {
               {/* recorre los pedidos y crea una fila por cada uno */}
               {pedidos.map((pedido) => (
                 <tr key={pedido.id}>
-                  <td className="fw-bold">{pedido.id}</td>
-                  <td>{pedido.fecha}</td>
-                  <td>{pedido.articulos}</td>
-                  <td>${pedido.total}</td>
+                  <td className="fw-bold">#{pedido.id}</td>
                   <td>{pedido.estado}</td>
+                  <td>${pedido.total}</td>
                 </tr>
               ))}
             </tbody>

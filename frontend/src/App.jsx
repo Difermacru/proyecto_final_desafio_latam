@@ -1,21 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
-import Navbar from './components/Navbar'; 
-import Footer from './components/Footer'; 
-import Inicio from './pages/Inicio';      
-import Productos from './pages/Productos'; 
-import Servicios from './pages/Servicios'; 
-import Login from './pages/Login'; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Inicio from './pages/Inicio';
+import Productos from './pages/Productos';
+import Servicios from './pages/Servicios';
+import Login from './pages/Login';
 import Carrito from './pages/Carrito';
-import Registro from './pages/Registro'; 
-import Perfil from './pages/Perfil'; 
-import MisPedidos from './pages/MisPedidos'; 
-import MisCitas from './pages/MisCitas'; 
-import MisFavoritos from './pages/MisFavoritos'; 
-import MisPublicaciones from './pages/MisPublicaciones'; 
-import Configuracion from './pages/Configuracion'; 
-import RutaProtegida from './components/RutaProtegida'; 
+import Registro from './pages/Registro';
+import Perfil from './pages/Perfil';
+import MisPedidos from './pages/MisPedidos';
+import MisCitas from './pages/MisCitas';
+import MisFavoritos from './pages/MisFavoritos';
+import MisPublicaciones from './pages/MisPublicaciones';
+import Configuracion from './pages/Configuracion';
+import RutaProtegida from './components/RutaProtegida';
 import DetalleProducto from './pages/DetalleProducto';
 import NuevaPublicacion from './pages/NuevaPublicacion';
+import EditarPublicacion from './pages/EditarPublicacion';
 
 function App() {
   return (
@@ -39,9 +40,9 @@ function App() {
             <Route path="/mis-favoritos" element={<RutaProtegida><MisFavoritos /></RutaProtegida>} />
             <Route path="/mis-publicaciones" element={<RutaProtegida><MisPublicaciones /></RutaProtegida>} />
             <Route path="/configuracion" element={<RutaProtegida><Configuracion /></RutaProtegida>} />
-            <Route path="/producto/:id" element={<DetalleProducto />} /> 
+            <Route path="/producto/:id" element={<DetalleProducto />} />
             <Route path="/nueva-publicacion" element={<RutaProtegida><NuevaPublicacion /></RutaProtegida>} />
-
+            <Route path="/editar-publicacion/:id" element={<RutaProtegida><EditarPublicacion /></RutaProtegida>} />
           </Routes>
         </div>
 
