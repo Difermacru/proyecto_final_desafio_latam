@@ -1,4 +1,4 @@
-import { useState } from 'react'; // para capturar los campos
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 // Página para crear una cuenta nueva
@@ -9,7 +9,7 @@ function Registro() {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mensaje, setMensaje] = useState(''); // para mostrar errores o éxito
+  const [mensaje, setMensaje] = useState('');
 
   // se ejecuta al hacer clic en "Crear Cuenta"
   const manejarRegistro = async () => {
@@ -23,16 +23,15 @@ function Registro() {
 
       const data = await respuesta.json();
 
-      // si el backend responde con error (ej: email ya existe)
       if (!respuesta.ok) {
         setMensaje(data.message || 'Error al registrar');
         return;
       }
 
-      // si todo bien: avisamos y redirigimos al login
       alert('¡Cuenta creada! Ahora inicia sesión.');
       navigate('/login');
     } catch (err) {
+      console.error(err);
       setMensaje('No se pudo conectar con el servidor');
     }
   };
@@ -43,10 +42,9 @@ function Registro() {
         <h2 className="fw-bold text-center">Crear Cuenta</h2>
         <p className="text-muted text-center">Únete a VetMarket en un minuto</p>
 
-        {/* mensaje de error si lo hay */}
         {mensaje && <div className="alert alert-danger">{mensaje}</div>}
 
-        {/* Nombre */}
+        {/* Nombre - conectado al estado 'nombre' */}
         <div className="mb-3">
           <label className="form-label">Nombre</label>
           <input

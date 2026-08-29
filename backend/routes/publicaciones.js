@@ -4,13 +4,16 @@ const validarToken = require('../middlewares/validarToken'); // el guardia del t
 const {
     getPublicaciones,
     getPublicacionPorId,
+    getPublicacionesPorUsuario,
     crearPublicacion,
     actualizarPublicacion,
     eliminarPublicacion
 } = require('../controllers/publicacionesController');
 
 // Rutas PÚBLICAS (cualquiera puede leer)
-router.get('/', getPublicaciones);              
+router.get('/', getPublicaciones);      
+// GET /api/publicaciones/usuario/5 → publicaciones del usuario 5
+router.get('/usuario/:usuario_id', getPublicacionesPorUsuario);        
 router.get('/:id', getPublicacionPorId);        
 
 // Rutas PROTEGIDAS (necesitan token válido) → aquí va el middleware

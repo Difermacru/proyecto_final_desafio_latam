@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"; // Link permite navegar sin recargar la página
+import { Link, useNavigate } from "react-router-dom"; // Link permite navegar sin recargar la página
 import { useContext } from "react"; // hook para leer el contexto
 import { CarritoContext } from "../context/CarritoContext"; // el contexto del carrito
 import { UsuarioContext } from "../context/UsuarioContext"; // el contexto del usuario
@@ -6,6 +6,13 @@ import { UsuarioContext } from "../context/UsuarioContext"; // el contexto del u
 function Navbar() {
   const { carrito } = useContext(CarritoContext); // leemos el carrito global
   const { usuario, logout } = useContext(UsuarioContext); // leemos el usuario y la función de salir
+  const navigate = useNavigate(); // para redirigir
+  // función que cierra sesión y lleva al login
+  const manejarLogout = () => {
+    logout();            // cierra la sesión
+    navigate('/login');  // redirige al login
+  };
+
   return (
     // navbar
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
@@ -49,9 +56,7 @@ function Navbar() {
               Mi Perfil
             </Link>
             {/* botón que cierra la sesión */}
-            <button className="nav-link btn btn-link" onClick={logout}>
-              Cerrar Sesión
-            </button>
+            <button className="nav-link btn btn-link" onClick={manejarLogout}>Cerrar Sesión</button>
           </>
         ) : (
           // Si NO hay usuario: muestra Iniciar Sesión y Registrarse

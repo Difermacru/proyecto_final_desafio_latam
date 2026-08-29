@@ -14,6 +14,7 @@ const publicacionesRoutes = require('./routes/publicaciones');
 const serviciosRoutes = require('./routes/servicios');
 const pedidosRoutes = require('./routes/pedidos');
 const citasRoutes = require('./routes/citas');
+const carritoRoutes = require('./routes/carrito');
 
 // ===== MIDDLEWARES =====
 app.use(cors());              // permite peticiones de otros orígenes (el frontend)
@@ -27,6 +28,7 @@ app.use('/api/publicaciones', publicacionesRoutes);
 app.use('/api/servicios', serviciosRoutes);
 app.use('/api/pedidos', pedidosRoutes);
 app.use('/api/citas', citasRoutes);
+app.use('/api/carrito', carritoRoutes);
 
 // ===== RUTA BÁSICA DE PRUEBA =====
 app.get('/', (req, res) => {

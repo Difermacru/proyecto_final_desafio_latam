@@ -81,9 +81,24 @@ const eliminarPublicacion = async (req, res) => {
     }
 };
 
+// LEER las publicaciones de UN usuario específico
+const getPublicacionesPorUsuario = async (req, res) => {
+    try {
+        const { usuario_id } = req.params; // el id del usuario viene en la URL
+        const { rows } = await pool.query(
+            'SELECT * FROM publicaciones WHERE usuario_id = $1',
+            [usuario_id]
+        );
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: error.message, message: 'Error interno del servidor' });
+    }
+};
+
 module.exports = {
     getPublicaciones,
     getPublicacionPorId,
+    getPublicacionesPorUsuario, 
     crearPublicacion,
     actualizarPublicacion,
     eliminarPublicacion

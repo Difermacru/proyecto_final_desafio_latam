@@ -1,32 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UsuarioContext } from '../context/UsuarioContext';
 import PanelMenu from '../components/PanelMenu';
 
 // Página para crear una nueva publicación
 function NuevaPublicacion() {
   const navigate = useNavigate();
+  const { usuario } = useContext(UsuarioContext); // el usuario logueado
 
   // estados para los campos del formulario
   const [titulo, setTitulo] = useState('');
   const [precio, setPrecio] = useState('');
   const [stock, setStock] = useState('');
   const [categoriaId, setCategoriaId] = useState('');
+  const [categorias, setCategorias] = useState([]); // lista de categorías del backend
   const [mensaje, setMensaje] = useState('');
+
+  // al cargar la página, traemos las categorías para el desplegable
+  useEffect(() => {
+    fetch('http://localhost:3000/api/categorias')
+      .then((res) => res.json())
+      .then((data) => setCategorias(data))
+      .catch((error) => console.error('Error al cargar categorías:', error));
+  }, []);
 
   const manejarSubmit = async () => {
     try {
-      // recuperamos el token que guardamos al hacer login
       const token = localStorage.getItem('token');
 
-      // enviamos la publicación al backend, incluyendo el token
       const respuesta = await fetch('http://localhost:3000/api/publicaciones', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // ← el token va aquí
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
-          usuario_id: 4, // temporal (luego se saca del token)
+          usuario_id: usuario.id,
           categoria_id: categoriaId,
           titulo,
           precio,
@@ -79,10 +88,18 @@ function NuevaPublicacion() {
               onChange={(e) => setStock(e.target.value)} />
           </div>
 
+          {/* menú desplegable de categorías */}
           <div className="mb-3">
-            <label className="form-label">ID de Categoría</label>
-            <input type="number" className="form-control" value={categoriaId}
-              onChange={(e) => setCategoriaId(e.target.value)} />
+            <label className="form-label">Categoría</label>
+            <select className="form-select" value={categoriaId}
+              onChange={(e) => setCategoriaId(e.target.value)}>
+              {/* opción por defecto vacía */}
+              <option value="">Selecciona una categoría</option>
+              {/* recorremos las categorías y creamos una opción por cada una */}
+              {categorias.map((cat) => (
+                <option key={cat.id} value={cat.id}>{cat.nombre}</option>
+              ))}
+            </select>
           </div>
 
           <button className="btn btn-success" onClick={manejarSubmit}>Guardar Publicación</button>

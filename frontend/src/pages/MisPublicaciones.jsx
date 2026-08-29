@@ -1,23 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PanelMenu from '../components/PanelMenu';
+import { UsuarioContext } from '../context/UsuarioContext';
 
 // Página que muestra las publicaciones del usuario
 function MisPublicaciones() {
   const [publicaciones, setPublicaciones] = useState([]);
+  const { usuario } = useContext(UsuarioContext);
 
   // función que trae las publicaciones del backend
-  const cargarPublicaciones = () => {
-    fetch('http://localhost:3000/api/publicaciones')
+   const cargarPublicaciones = () => {
+    // usamos el id del usuario logueado para traer SOLO sus publicaciones
+    fetch(`http://localhost:3000/api/publicaciones/usuario/${usuario.id}`)
       .then((res) => res.json())
       .then((data) => setPublicaciones(data))
       .catch((error) => console.error('Error al cargar publicaciones:', error));
   };
 
   // al cargar la página, traemos las publicaciones
-  useEffect(() => {
-    cargarPublicaciones();
-  }, []);
+   useEffect(() => {
+    if (usuario) cargarPublicaciones(); // solo si hay usuario logueado
+  }, [usuario]);
 
   // función para eliminar una publicación
   const eliminarPublicacion = async (id) => {

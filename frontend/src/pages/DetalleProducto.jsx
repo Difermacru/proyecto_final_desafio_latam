@@ -53,10 +53,7 @@ function DetalleProducto() {
           <h1 className="fw-bold">{producto.titulo}</h1>
           <p className="text-success fs-3 fw-bold">${producto.precio}</p>
           <p>Stock disponible: {producto.stock}</p>
-          <button
-            className="btn btn-primary"
-            onClick={() => agregarAlCarrito({ nombre: producto.titulo, precio: producto.precio })}
-          >
+          <button className="btn btn-primary" onClick={() => agregarAlCarrito(producto.id)}>
             Añadir al Carrito
           </button>
         </div>
