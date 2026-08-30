@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'; // lee el id de la URL
 import { useState, useEffect, useContext } from 'react';
 import { CarritoContext } from '../context/CarritoContext';
+import { API_URL } from '../config';
 
 // Página que muestra el detalle de UN producto
 function DetalleProducto() {
@@ -12,7 +13,7 @@ function DetalleProducto() {
 
   useEffect(() => {
     // pedimos al backend el producto por su id
-    fetch(`http://localhost:3000/api/publicaciones/${id}`)
+    fetch(`${API_URL}/api/publicaciones/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setProducto(data);

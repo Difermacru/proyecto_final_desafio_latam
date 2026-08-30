@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; // hooks
 import PanelMenu from '../components/PanelMenu'; // menú lateral reutilizable
+import { API_URL } from '../config';
 
 // Página que muestra los pedidos del usuario
 function MisPedidos() {
@@ -7,7 +8,7 @@ function MisPedidos() {
 
   // al cargar, llenamos los pedidos (luego vendrán de la API)
   useEffect(() => {
-    fetch('http://localhost:3000/api/pedidos')
+    fetch(`${API_URL}/api/pedidos`)
       .then((res) => res.json())
       .then((data) => setPedidos(data))
       .catch((error) => console.error('Error al cargar pedidos:', error));

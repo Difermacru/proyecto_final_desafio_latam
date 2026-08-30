@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { API_URL } from '../config';
 
 // Página para crear una cuenta nueva
 function Registro() {
@@ -15,7 +16,7 @@ function Registro() {
   const manejarRegistro = async () => {
     try {
       // enviamos los datos al backend
-      const respuesta = await fetch('http://localhost:3000/api/usuarios', {
+      const respuesta = await fetch(`${API_URL}/api/usuarios`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, password }),

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; // hooks
 import PanelMenu from '../components/PanelMenu'; // menú lateral reutilizable
+import { API_URL } from '../config';
 
 // Página que muestra las citas del usuario
 function MisCitas() {
@@ -7,7 +8,7 @@ function MisCitas() {
 
   // al cargar, llenamos las citas (luego vendrán de la API)
   useEffect(() => {
-    fetch('http://localhost:3000/api/citas')
+    fetch(`${API_URL}/api/citas`)
       .then((res) => res.json())
       .then((data) => setCitas(data))
       .catch((error) => console.error('Error al cargar citas:', error));

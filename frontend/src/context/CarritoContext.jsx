@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { UsuarioContext } from './UsuarioContext';
+import { API_URL } from '../config';
 
 export const CarritoContext = createContext();
 
@@ -10,7 +11,7 @@ export function CarritoProvider({ children }) {
   // función para traer el carrito del backend
   const cargarCarrito = () => {
     if (!usuario) return; // si no hay usuario, no hace nada
-    fetch(`http://localhost:3000/api/carrito/${usuario.id}`)
+    fetch(`${API_URL}/api/carrito/${usuario.id}`)
       .then((res) => res.json())
       .then((data) => setCarrito(data))
       .catch((error) => console.error('Error al cargar carrito:', error));
@@ -32,7 +33,7 @@ export function CarritoProvider({ children }) {
       return;
     }
     try {
-      await fetch('http://localhost:3000/api/carrito', {
+      await fetch(`${API_URL}/api/carrito`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -50,7 +51,7 @@ export function CarritoProvider({ children }) {
   // eliminar un item del carrito (de la base)
   const eliminarDelCarrito = async (itemId) => {
     try {
-      await fetch(`http://localhost:3000/api/carrito/${itemId}`, {
+      await fetch(`${API_URL}/api/carrito/${itemId}`, {
         method: 'DELETE',
       });
       cargarCarrito(); // recargamos para que desaparezca

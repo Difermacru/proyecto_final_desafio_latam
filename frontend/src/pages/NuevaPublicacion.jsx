@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UsuarioContext } from '../context/UsuarioContext';
 import PanelMenu from '../components/PanelMenu';
+import { API_URL } from '../config';
 
 // Página para crear una nueva publicación
 function NuevaPublicacion() {
@@ -18,7 +19,7 @@ function NuevaPublicacion() {
 
   // al cargar la página, traemos las categorías para el desplegable
   useEffect(() => {
-    fetch('http://localhost:3000/api/categorias')
+    fetch(`${API_URL}/api/categorias`)
       .then((res) => res.json())
       .then((data) => setCategorias(data))
       .catch((error) => console.error('Error al cargar categorías:', error));
@@ -28,7 +29,7 @@ function NuevaPublicacion() {
     try {
       const token = localStorage.getItem('token');
 
-      const respuesta = await fetch('http://localhost:3000/api/publicaciones', {
+      const respuesta = await fetch(`${API_URL}/api/publicaciones`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

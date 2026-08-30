@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'; // useState para los campos
 import { useNavigate, Link } from 'react-router-dom';
 import { UsuarioContext } from '../context/UsuarioContext';
-
+import { API_URL } from '../config';
 // Página de inicio de sesión
 function Login() {
   const { login } = useContext(UsuarioContext); // función para guardar la sesión
@@ -16,7 +16,7 @@ function Login() {
   const manejarLogin = async () => {
     try {
       // pedimos al backend que valide las credenciales
-      const respuesta = await fetch('http://localhost:3000/api/login', {
+      const respuesta = await fetch(`${API_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }), // enviamos email y password

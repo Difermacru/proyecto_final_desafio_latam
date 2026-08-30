@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
+import { API_URL } from '../config';
 
 // Página que muestra el listado de productos
 function Productos() {
@@ -7,7 +8,7 @@ function Productos() {
 
   useEffect(() => {
     // pedimos las publicaciones al backend
-    fetch('http://localhost:3000/api/publicaciones')
+    fetch(`${API_URL}/api/publicaciones`)
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error('Error al cargar productos:', error));

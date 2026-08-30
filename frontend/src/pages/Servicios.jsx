@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; // hooks
 import ServiceCard from '../components/ServiceCard'; // tarjeta de servicios
+import { API_URL } from '../config';
 
 // Página que muestra el listado de servicios
 function Servicios() {
@@ -7,7 +8,7 @@ function Servicios() {
 
   // al cargar, llenamos los servicios (luego vendrán de la API) — con imagen
   useEffect(() => {
-    fetch('http://localhost:3000/api/servicios')
+    fetch(`${API_URL}/api/servicios`)
       .then((res) => res.json())
       .then((data) => setServicios(data))
       .catch((error) => console.error('Error al cargar servicios:', error));

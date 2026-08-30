@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PanelMenu from '../components/PanelMenu';
 import { UsuarioContext } from '../context/UsuarioContext';
+import { API_URL } from '../config';
 
 // Página que muestra las publicaciones del usuario
 function MisPublicaciones() {
@@ -11,7 +12,7 @@ function MisPublicaciones() {
   // función que trae las publicaciones del backend
    const cargarPublicaciones = () => {
     // usamos el id del usuario logueado para traer SOLO sus publicaciones
-    fetch(`http://localhost:3000/api/publicaciones/usuario/${usuario.id}`)
+    fetch(`${API_URL}/api/publicaciones/usuario/${usuario.id}`)
       .then((res) => res.json())
       .then((data) => setPublicaciones(data))
       .catch((error) => console.error('Error al cargar publicaciones:', error));
@@ -30,7 +31,7 @@ function MisPublicaciones() {
     try {
       const token = localStorage.getItem('token'); // el token guardado al hacer login
 
-      const respuesta = await fetch(`http://localhost:3000/api/publicaciones/${id}`, {
+      const respuesta = await fetch(`${API_URL}/api/publicaciones/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`, // ruta protegida: necesita token

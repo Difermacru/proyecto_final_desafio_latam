@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PanelMenu from '../components/PanelMenu';
+import { API_URL } from '../config';
 
 // Página para editar una publicación existente
 function EditarPublicacion() {
@@ -16,7 +17,7 @@ function EditarPublicacion() {
 
   // al cargar, traemos los datos actuales de la publicación
   useEffect(() => {
-    fetch(`http://localhost:3000/api/publicaciones/${id}`)
+    fetch(`${API_URL}/api/publicaciones/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // llenamos los campos con los datos actuales
@@ -33,7 +34,7 @@ function EditarPublicacion() {
     try {
       const token = localStorage.getItem('token');
 
-      const respuesta = await fetch(`http://localhost:3000/api/publicaciones/${id}`, {
+      const respuesta = await fetch(`${API_URL}/api/publicaciones/${id}`, {
         method: 'PUT', // PUT es para actualizar
         headers: {
           'Content-Type': 'application/json',

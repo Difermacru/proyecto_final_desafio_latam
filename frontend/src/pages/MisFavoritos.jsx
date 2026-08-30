@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PanelMenu from "../components/PanelMenu";
+import { API_URL } from '../config';
 
 // Página que muestra los productos favoritos del usuario
 function MisFavoritos() {
@@ -7,7 +8,7 @@ function MisFavoritos() {
 
   useEffect(() => {
     // por ahora traemos las publicaciones como favoritos (simple)
-    fetch('http://localhost:3000/api/publicaciones')
+    fetch(`${API_URL}/api/publicaciones`)
       .then((res) => res.json())
       .then((data) => setFavoritos(data))
       .catch((error) => console.error('Error al cargar favoritos:', error));
