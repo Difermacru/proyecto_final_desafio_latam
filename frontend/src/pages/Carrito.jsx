@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CarritoContext } from '../context/CarritoContext';
 
 // Página del carrito de compras
 function Carrito() {
   const { carrito, eliminarDelCarrito } = useContext(CarritoContext);
+  const navigate = useNavigate();
 
   // calculamos el total sumando precio × cantidad de cada item
   const total = carrito.reduce((suma, item) => {
@@ -58,7 +60,9 @@ function Carrito() {
             </div>
           </div>
 
-          <button className="btn btn-success w-100 mt-3">Proceder al Pago</button>
+          <button className="btn btn-success w-100 mt-3" onClick={() => navigate('/pago')}>
+            Proceder al Pago
+          </button>
         </>
       )}
     </div>

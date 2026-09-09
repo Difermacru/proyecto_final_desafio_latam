@@ -1,5 +1,6 @@
 // Tarjeta reutilizable para servicios: recibe datos por props (nombre, precio, imagen)
-function ServiceCard({ nombre, precio, imagen }) {
+// onReservar: función que el padre (Servicios.jsx) pasa para abrir el formulario de reserva
+function ServiceCard({ nombre, precio, imagen, onReservar }) {
   return (
     <div className="service-card">
       {/* imagen del servicio arriba de la tarjeta */}
@@ -14,7 +15,7 @@ function ServiceCard({ nombre, precio, imagen }) {
         <h5 className="service-card__title">{nombre}</h5>
         <p className="service-card__price">${precio}</p>
         {/* los servicios se reservan, no se agregan al carrito */}
-        <button className="service-card__btn">Reservar</button>
+        <button className="service-card__btn" onClick={onReservar}>Reservar</button>
       </div>
     </div>
   );

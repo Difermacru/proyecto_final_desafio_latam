@@ -17,6 +17,8 @@ import RutaProtegida from './components/RutaProtegida';
 import DetalleProducto from './pages/DetalleProducto';
 import NuevaPublicacion from './pages/NuevaPublicacion';
 import EditarPublicacion from './pages/EditarPublicacion';
+import Pago from './pages/Pago';
+import EditarPerfil from './pages/EditarPerfil';
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
             <Route path="/producto/:id" element={<DetalleProducto />} />
             <Route path="/nueva-publicacion" element={<RutaProtegida><NuevaPublicacion /></RutaProtegida>} />
             <Route path="/editar-publicacion/:id" element={<RutaProtegida><EditarPublicacion /></RutaProtegida>} />
+            <Route path="/pago" element={<RutaProtegida><Pago /></RutaProtegida>} />
+            <Route path="/editar-perfil" element={<RutaProtegida><EditarPerfil /></RutaProtegida>} />
           </Routes>
         </div>
 

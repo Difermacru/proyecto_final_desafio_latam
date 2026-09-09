@@ -33,4 +33,55 @@ const registrarUsuario = async (req, res) => {
     }
 };
 
-module.exports = { registrarUsuario };
+// LEER los datos de UN usuario (para precargar el formulario de edición)
+const getUsuarioPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rows } = await pool.query(
+            'SELECT id, nombre, apellido, email, telefono, direccion, rol FROM usuarios WHERE id = $1',
+            [id]
+        );
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+        res.json(rows[0]);
+    } catch (error) {
+        res.status(500).json({ error: error.message, message: 'Error interno del servidor' });
+    }
+};
+
+// ACTUALIZAR el perfil del usuario logeado
+const actualizarUsuario = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // solo puede editar su propio perfil
+        if (Number(id) !== req.usuario.id) {
+            return res.status(403).json({ message: 'No puedes editar el perfil de otro usuario' });
+        }
+
+        const { nombre, apellido, email, telefono, direccion } = req.body;
+
+        const query = `
+            UPDATE usuarios
+            SET nombre = $1, apellido = $2, email = $3, telefono = $4, direccion = $5
+            WHERE id = $6
+            RETURNING id, nombre, apellido, email, telefono, direccion, rol
+        `;
+        const values = [nombre, apellido, email, telefono, direccion, id];
+        const { rows } = await pool.query(query, values);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        res.json({ message: 'Perfil actualizado', usuario: rows[0] });
+    } catch (error) {
+        if (error.code === '23505') {
+            return res.status(400).json({ message: 'El correo electrónico ya está en uso' });
+        }
+        res.status(500).json({ error: error.message, message: 'Error interno del servidor' });
+    }
+};
+
+module.exports = { registrarUsuario, getUsuarioPorId, actualizarUsuario };
