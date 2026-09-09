@@ -31,8 +31,6 @@ function MisPedidos() {
                 <th>Pedido</th>
                 <th>Fecha</th>
                 <th>Artículos</th>
-                <th>Total</th>
-                <th>Estado</th>
               </tr>
             </thead>
             <tbody>
